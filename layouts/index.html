@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+  {{/* Hero section */}}
+  <section class="py-20 text-center">
+    <h1 class="text-5xl sm:text-6xl font-bold text-stone-900 mb-6 leading-tight">
+      {{ .Site.Title }}
+    </h1>
+    <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+      {{ .Site.Params.subtitle }}
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/galerie/"
+         class="px-8 py-4 rounded-xl bg-platane text-white text-lg font-semibold hover:bg-platane-dark transition-colors shadow-lg shadow-platane/30">
+        Galerie
+      </a>
+      <a href="/kontakt/"
+         class="px-8 py-4 rounded-xl border-2 border-stone-200 text-stone-700 text-lg font-medium hover:border-platane hover:text-platane transition-colors">
+        Kontakt
+      </a>
+    </div>
+  </section>
+
+  {{/* Gallery previews – one card per album */}}
+  <section class="py-16 border-t border-stone-100">
+    <h2 class="text-3xl font-bold text-stone-900 mb-10 text-center">Impressionen</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {{ range (where .Site.RegularPages "Section" "galerie").ByTitle }}
+        {{ $images := .Resources.Match "images/*.{jpg,jpeg,png,webp}" }}
+        {{ $cover := index $images 0 }}
+        {{ if $cover }}
+          {{ $thumb := $cover.Fill "600x400 q85 Lanczos" }}
+          <a href="{{ .RelPermalink }}" class="group block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+            <div class="aspect-3/2 overflow-hidden">
+              <img src="{{ $thumb.RelPermalink }}"
+                   width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+                   alt="{{ .Title }}"
+                   loading="lazy"
+                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-4 bg-white">
+              <h3 class="font-semibold text-stone-900 group-hover:text-platane transition-colors">{{ .Title }}</h3>
+              <p class="text-sm text-stone-500 mt-1">{{ len $images }} Fotos</p>
+            </div>
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* Page body content */}}
+  {{ with .Content }}
+  <section class="py-12 max-w-3xl mx-auto prose prose-stone">
+    {{ . }}
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

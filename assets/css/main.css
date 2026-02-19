@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-platane: #4a7c59;
+  --color-platane-dark: #3a6347;
+  --color-platane-light: #e8f0eb;
+}

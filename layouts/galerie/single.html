@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+  {{/* Breadcrumb */}}
+  <nav class="text-sm text-stone-500 mb-6" aria-label="Breadcrumb">
+    <a href="/" class="hover:text-platane">Home</a>
+    <span class="mx-1">/</span>
+    <a href="/galerie/" class="hover:text-platane">Galerie</a>
+    <span class="mx-1">/</span>
+    <span class="text-stone-700">{{ .Title }}</span>
+  </nav>
+
+  <h1 class="text-4xl font-bold text-stone-900 mb-4">{{ .Title }}</h1>
+  {{ with .Content }}
+  <div class="prose prose-stone mb-8">{{ . }}</div>
+  {{ end }}
+
+  {{/* Photo grid */}}
+  {{ $images := .Resources.Match "images/*.{jpg,jpeg,png,webp}" }}
+  {{ if $images }}
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2" data-album="{{ .File.ContentBaseName }}">
+    {{ range $images }}
+    {{ $thumb := .Fill "400x300 q85 Lanczos" }}
+    {{ $full := .Fit "1600x1200 q90 Lanczos" }}
+    <a href="{{ $full.RelPermalink }}"
+       class="glightbox block overflow-hidden rounded-lg group"
+       data-gallery="{{ $.File.ContentBaseName }}"
+       data-title="{{ .Title | default (path.Base .Name) }}">
+      <img src="{{ $thumb.RelPermalink }}"
+           width="{{ $thumb.Width }}"
+           height="{{ $thumb.Height }}"
+           alt="{{ .Title | default $.Title }}"
+           loading="lazy"
+           class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+    </a>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p class="text-stone-400 italic">Keine Fotos vorhanden.</p>
+  {{ end }}
+
+  {{/* Back link */}}
+  <div class="mt-10">
+    <a href="/galerie/" class="text-platane hover:underline">&larr; Alle Galerien</a>
+  </div>
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  document.querySelectorAll('[data-album]').forEach(function(grid) {
+    var album = grid.dataset.album;
+    GLightbox({ selector: '[data-gallery="' + album + '"]', touchNavigation: true, loop: true });
+  });
+</script>
+{{ end }}

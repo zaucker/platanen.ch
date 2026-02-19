@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+  <h1 class="text-4xl font-bold text-stone-900 mb-4">{{ .Title }}</h1>
+  {{ with .Content }}
+  <div class="prose prose-stone mb-10">{{ . }}</div>
+  {{ end }}
+
+  {{/* Album cards grid */}}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{ range .Pages.ByTitle }}
+      {{ $images := .Resources.Match "images/*.{jpg,jpeg,png,webp}" }}
+      {{ $cover := index $images 0 }}
+      {{ if $cover }}
+        {{ $thumb := $cover.Fill "600x400 q85 Lanczos" }}
+        <a href="{{ .RelPermalink }}" class="group block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <div class="aspect-3/2 overflow-hidden">
+            <img src="{{ $thumb.RelPermalink }}"
+                 width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+                 alt="{{ .Title }}"
+                 loading="lazy"
+                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          </div>
+          <div class="p-4 bg-white">
+            <h3 class="font-semibold text-stone-900 group-hover:text-platane transition-colors">{{ .Title }}</h3>
+            <p class="text-sm text-stone-500 mt-1">{{ len $images }} Fotos</p>
+          </div>
+        </a>
+      {{ end }}
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}

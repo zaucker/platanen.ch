@@ -1,0 +1,35 @@
+baseURL = "https://platanen.ch/"
+title = "Platanen @ 4600"
+languageCode = "de"
+
+enableRobotsTXT = true
+
+[imaging]
+  quality = 85
+  resampleFilter = "Lanczos"
+
+[taxonomies]
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[params]
+  description = "Platanen – unsere Strasse in Olten"
+  subtitle = "Unsere Strasse in Olten"
+  ownerName = "Platanen @ 4600"
+  ownerEmail = "platanen@zaucker.com"
+  city = "CH-4600 Olten"
+
+[[menus.main]]
+  name = "Home"
+  pageRef = "/"
+  weight = 10
+[[menus.main]]
+  name = "Galerie"
+  pageRef = "/galerie/"
+  weight = 20
+[[menus.main]]
+  name = "Kontakt"
+  pageRef = "/kontakt/"
+  weight = 40
