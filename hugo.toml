@@ -16,10 +16,10 @@ enableRobotsTXT = true
 
 [params]
   description = "Platanen – unsere Strasse in Olten"
-  subtitle = "Unsere Strasse in Olten"
+#  subtitle = "Unsere Strasse in Olten"
   ownerName = "Platanen @ 4600"
-  ownerEmail = "platanen@zaucker.com"
-  city = "CH-4600 Olten"
+  ownerEmail = "webmaster@platanen.ch"
+#  city = "CH-4600 Olten"
 
 [[menus.main]]
   name = "Home"

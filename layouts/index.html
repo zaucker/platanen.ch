@@ -1,26 +1,6 @@
 {{ define "main" }}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  {{/* Hero section */}}
-  <section class="py-20 text-center">
-    <h1 class="text-5xl sm:text-6xl font-bold text-stone-900 mb-6 leading-tight">
-      {{ .Site.Title }}
-    </h1>
-    <p class="text-xl text-stone-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-      {{ .Site.Params.subtitle }}
-    </p>
-    <div class="flex flex-wrap gap-4 justify-center">
-      <a href="/galerie/"
-         class="px-8 py-4 rounded-xl bg-platane text-white text-lg font-semibold hover:bg-platane-dark transition-colors shadow-lg shadow-platane/30">
-        Galerie
-      </a>
-      <a href="/kontakt/"
-         class="px-8 py-4 rounded-xl border-2 border-stone-200 text-stone-700 text-lg font-medium hover:border-platane hover:text-platane transition-colors">
-        Kontakt
-      </a>
-    </div>
-  </section>
-
   {{/* Gallery previews – one card per album */}}
   <section class="py-16 border-t border-stone-100">
     <h2 class="text-3xl font-bold text-stone-900 mb-10 text-center">Impressionen</h2>
