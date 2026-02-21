@@ -1,5 +1,5 @@
 ---
-title: "Garten"
+title: "Gärten"
 description: "Grüne Oasen in der Nachbarschaft"
 weight: 30
 ---
