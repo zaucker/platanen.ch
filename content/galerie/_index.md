@@ -2,4 +2,4 @@
 title: "Galerie"
 ---
 
-Eindrücke aus unserer Strasse und Nachbarschaft.
+Eindrücke aus dem Quartier und der Umgebung.
